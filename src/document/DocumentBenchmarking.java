@@ -3,6 +3,7 @@ package document;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
 
 /** A class for timing the EfficientDocument and BasicDocument classes
  * 
@@ -37,9 +38,15 @@ public class DocumentBenchmarking {
 		// TODO: Fill in the rest of this method so that it runs two loops
 		// and prints out timing results as described in the assignment 
 		// instructions and following the pseudocode below.
-		for (int numToCheck = start; numToCheck < numSteps*increment + start; 
+		System.out.println("NumberOfChars\tBasicTime\tEfficientTime");
+		for (int numToCheck = start; numToCheck < numSteps*increment + start;
 				numToCheck += increment)
 		{
+			System.out.print(numToCheck+"\t");
+			String text = getStringFromFile(textfile, numToCheck);
+			System.out.print(measureTimeBasic(trials, text)+"\t");
+			System.out.print(measureTimeEfficient(trials, text)+"\t");
+			System.out.println();
 			// numToCheck holds the number of characters that you should read from the 
 			// file to create both a BasicDocument and an EfficientDocument.  
 			
@@ -61,6 +68,26 @@ public class DocumentBenchmarking {
 			 
 		}
 	
+	}
+
+	public static long measureTimeBasic(int t, String text){
+		long startTime = System.nanoTime();
+		for (int i =0; i < t; i++ ){
+			BasicDocument bd = new BasicDocument(text);
+			bd.getFleschScore();
+		}
+		long endTime = System.nanoTime();
+		return TimeUnit.MILLISECONDS.convert(endTime-startTime, TimeUnit.NANOSECONDS);
+	}
+
+	public static long measureTimeEfficient(int t, String text){
+		long startTime = System.nanoTime();
+		for (int i =0; i < t; i++ ){
+			EfficientDocument ed = new EfficientDocument(text);
+			ed.getFleschScore();
+		}
+		long endTime = System.nanoTime();
+		return TimeUnit.MILLISECONDS.convert(endTime-startTime, TimeUnit.NANOSECONDS);
 	}
 	
 	/** Get a specified number of characters from a text file
@@ -96,5 +123,5 @@ public class DocumentBenchmarking {
 		
 		return s.toString();
 	}
-	
+
 }
