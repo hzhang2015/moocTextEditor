@@ -63,8 +63,6 @@ public class EfficientDocument extends Document {
 		if (!tokens.isEmpty() && isWord(tokens.get(tokens.size()-1))){
 			numSentences++;
 		}
-		// TODO: Finish this method.  Remember the countSyllables method from 
-		// Document.  That will come in handy here.  isWord defined above will also help.
 	}
 
 	
@@ -83,7 +81,6 @@ public class EfficientDocument extends Document {
 	 */
 	@Override
 	public int getNumSentences() {
-		//TODO: write this method.  Hint: It's simple
 		return numSentences;
 	}
 
@@ -104,7 +101,6 @@ public class EfficientDocument extends Document {
 	 */
 	@Override
 	public int getNumWords() {
-		//TODO: write this method.  Hint: It's simple
 	    return numWords;
 	}
 
@@ -126,7 +122,6 @@ public class EfficientDocument extends Document {
 	 */
 	@Override
 	public int getNumSyllables() {
-        //TODO: write this method.  Hint: It's simple
         return numSyllables;
 	}
 	
